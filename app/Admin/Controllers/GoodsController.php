@@ -35,8 +35,10 @@ class GoodsController extends AdminController
         $grid->column('shop_price', __('Shop price'));
         $grid->column('keywords', __('Keywords'));
         $grid->column('goods_desc', __('Goods desc'));
-        $grid->column('goods_img', __('Goods img'));
-        $grid->column('add_time', __('Add time'));
+        $grid->column('goods_img', __('Goods img'))->image();
+        $grid->column('add_time', __('Add time'))->display(function($time){
+            return date('Y-m-d h:i:s');
+        });
         $grid->column('is_delete', __('Is delete'));
         $grid->column('sale_num', __('Sale num'));
 
@@ -79,16 +81,16 @@ class GoodsController extends AdminController
     {
         $form = new Form(new GoodsModel());
 
-        $form->number('cat_id', __('Cat id'));
-        $form->text('goods_sn', __('Goods sn'));
+        $form->number('cat_id', __('分类'));
+        $form->text('goods_sn', __('商品编号'));
         $form->text('goods_name', __('Goods name'));
         $form->number('click_count', __('Click count'));
         $form->number('goods_number', __('Goods number'));
         $form->decimal('shop_price', __('Shop price'))->default(0.00);
         $form->text('keywords', __('Keywords'));
         $form->textarea('goods_desc', __('Goods desc'));
-        $form->text('goods_img', __('Goods img'));
-        $form->number('add_time', __('Add time'));
+        $form->image('goods_img', __('Goods img'));
+        $form->text('add_time', __('添加时间'));
         $form->switch('is_delete', __('Is delete'));
         $form->number('sale_num', __('Sale num'));
 

@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test/upload','TestController@uploadImg');
+Route::post('/test/uploadadd','TestController@uploadadd');
