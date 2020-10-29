@@ -38,3 +38,14 @@ Route::get('/active','LoginController@active');
 
 // 购物车
 Route::get('/cart','IndexController@cart');
+//加入购物车
+Route::get('/cart_add','IndexController@cart_add');
+//收藏
+Route::get('/collect','IndexController@collect');
+
+// 电影票
+Route::get('/ticket','MovieController@ticket');
+Route::get('/addd','MovieController@addd');
+
+// GITHUB登录
+Route::get('/github/callback','LoginController@github');

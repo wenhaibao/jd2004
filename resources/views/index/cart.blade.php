@@ -7,8 +7,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 	<title>我的购物车</title>
 
-    <link rel="stylesheet" type="text/css" href="css/webbase.css" />
-    <link rel="stylesheet" type="text/css" href="css/pages-cart.css" />
+    <link rel="stylesheet" type="text/css" href="/reception/css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="/reception/css/pages-cart.css" />
 </head>
 
 <body>
@@ -16,10 +16,14 @@
 	<div class="top">
 		<div class="py-container">
 			<div class="shortcut">
-				<ul class="fl">
-					<li class="f-item">品优购欢迎您！</li>
-					<li class="f-item">请登录　<span><a href="#">免费注册</a></span></li>
-				</ul>
+			<ul class="fl">
+						<li class="f-item">品优购欢迎您！</li>
+						@if(!session('userinfo'))
+						<li class="f-item">请<a href="{{url('login')}}" target="_blank">登录</a>　<span><a href="{{url('register')}}" target="_blank">免费注册</a></span></li>
+						@else
+						<li class="f-item"><a href="login.html" target="_blank">{{session('userinfo')->user_name}}</a>　<span><a href="quit" target="_blank">退出</a></span></li>
+						@endif
+					</ul>
 				<ul class="fr">
 					<li class="f-item">我的订单</li>
 					<li class="f-item space"></li>
@@ -69,6 +73,8 @@
 						<span class="shopname self">传智自营</span>
 					</div>
 					<div class="cart-body">
+						<!-- sss -->
+						@foreach($goods as $v)
 						<div class="cart-list">
 							<ul class="goods-list yui3-g">
 								<li class="yui3-u-1-24">
@@ -76,82 +82,29 @@
 								</li>
 								<li class="yui3-u-11-24">
 									<div class="good-item">
-										<div class="item-img"><img src="img/goods.png" /></div>
-										<div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存
-											尺寸：13.3英寸</div>
+										<div class="item-img"><img src="/reception/img/goods.png" /></div>
+										<div class="item-msg">{{$v->goods_name}}</div>
 									</div>
 								</li>
 								
-								<li class="yui3-u-1-8"><span class="price">8848.00</span></li>
+								<li class="yui3-u-1-8"><span class="price">{{$v->shop_price}}</span></li>
 								<li class="yui3-u-1-8">
 									<a href="javascript:void(0)" class="increment mins">-</a>
-									<input autocomplete="off" type="text" value="1" minnum="1" class="itxt" />
+									<input autocomplete="off" type="text" value="{{$v->goods_num}}" minnum="1" class="itxt" />
 									<a href="javascript:void(0)" class="increment plus">+</a>
 								</li>
-								<li class="yui3-u-1-8"><span class="sum">8848.00</span></li>
+								<li class="yui3-u-1-8"><span class="sum">{{$v->goods_num * $v->shop_price}}</span></li>
 								<li class="yui3-u-1-8">
 									<a href="#none">删除</a><br />
 									<a href="#none">移到我的关注</a>
 								</li>
 							</ul>
 						</div>
-						<div class="cart-list">
-							<ul class="goods-list yui3-g">
-								<li class="yui3-u-1-24">
-									<input type="checkbox" name="" id="" value="" />
-								</li>
-								<li class="yui3-u-11-24">
-									<div class="good-item">
-										<div class="item-img"><img src="img/goods.png" /></div>
-										<div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存
-											尺寸：13.3英寸</div>
-									</div>
-								</li>
-								
-								<li class="yui3-u-1-8"><span class="price">8848.00</span></li>
-								<li class="yui3-u-1-8">
-									<a href="javascript:void(0)" class="increment mins">-</a>
-									<input autocomplete="off" type="text" value="1" minnum="1" class="itxt" />
-									<a href="javascript:void(0)" class="increment plus">+</a>
-								</li>
-								<li class="yui3-u-1-8"><span class="sum">8848.00</span></li>
-								<li class="yui3-u-1-8">
-									<a href="#none">删除</a><br />
-									<a href="#none">移到我的关注</a>
-								</li>
-							</ul>
-						</div>
-						<div class="cart-list">
-							<ul class="goods-list yui3-g">
-								<li class="yui3-u-1-24">
-									<input type="checkbox" name="" id="" value="" />
-								</li>
-								<li class="yui3-u-11-24">
-									<div class="good-item">
-										<div class="item-img"><img src="img/goods.png" /></div>
-										<div class="item-msg">
-											Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存
-											尺寸：13.3英寸
-										</div>
-									</div>
-								</li>
-								
-								<li class="yui3-u-1-8"><span class="price">8848.00</span></li>
-								<li class="yui3-u-1-8">
-									<a href="javascript:void(0)" class="increment mins">-</a>
-									<input autocomplete="off" type="text" value="1" minnum="1" class="itxt" />
-									<a href="javascript:void(0)" class="increment plus">+</a>
-								</li>
-								<li class="yui3-u-1-8"><span class="sum">8848.00</span></li>
-								<li class="yui3-u-1-8">
-									<a href="#none">删除</a><br />
-									<a href="#none">移到我的关注</a>
-								</li>
-							</ul>
-						</div>
+						@endforeach
+						<!-- sssend -->
 					</div>
 				</div>
-				<div class="cart-item-list">
+				<!-- <div class="cart-item-list">
 					<div class="cart-shop">
 						<input type="checkbox" name="" id="" value="" />
 						<span class="shopname">神州数码专营店</span>
@@ -164,7 +117,7 @@
 								</li>
 								<li class="yui3-u-11-24">
 									<div class="good-item">
-										<div class="item-img"><img src="img/goods.png" /></div>
+										<div class="item-img"><img src="/reception/img/goods.png" /></div>
 										<div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存
 											尺寸：13.3英寸</div>
 									</div>
@@ -190,7 +143,7 @@
 								</li>
 								<li class="yui3-u-11-24">
 									<div class="good-item">
-										<div class="item-img"><img src="img/goods.png" /></div>
+										<div class="item-img"><img src="/reception/img/goods.png" /></div>
 										<div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存
 											尺寸：13.3英寸</div>
 									</div>
@@ -210,7 +163,7 @@
 							</ul>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="cart-tool">
 				<div class="select-all">
@@ -271,7 +224,7 @@
 								<div class="active item">
 									<ul>
 										<li>
-											<img src="img/like1.png" />
+											<img src="/reception/img/like1.png" />
 											<div class="intro">
 												<i>Apple苹果iPhone 6s (A1699)</i>
 											</div>
@@ -283,7 +236,7 @@
 											</div>
 										</li>
 										<li>
-											<img src="img/like2.png" />
+											<img src="/reception/img/like2.png" />
 											<div class="intro">
 												<i>Apple苹果iPhone 6s (A1699)</i>
 											</div>
@@ -295,7 +248,7 @@
 											</div>
 										</li>
 										<li>
-											<img src="img/like3.png" />
+											<img src="/reception/img/like3.png" />
 											<div class="intro">
 												<i>Apple苹果iPhone 6s (A1699)</i>
 											</div>
@@ -307,7 +260,7 @@
 											</div>
 										</li>
 										<li>
-											<img src="img/like4.png" />
+											<img src="/reception/img/like4.png" />
 											<div class="intro">
 												<i>Apple苹果iPhone 6s (A1699)</i>
 											</div>
@@ -323,7 +276,7 @@
 								<div class="item">
 									<ul>
 										<li>
-											<img src="img/like1.png" />
+											<img src="/reception/img/like1.png" />
 											<div class="intro">
 												<i>Apple苹果iPhone 6s (A1699)</i>
 											</div>
@@ -335,7 +288,7 @@
 											</div>
 										</li>
 										<li>
-											<img src="img/like2.png" />
+											<img src="/reception/img/like2.png" />
 											<div class="intro">
 												<i>Apple苹果iPhone 6s (A1699)</i>
 											</div>
@@ -347,7 +300,7 @@
 											</div>
 										</li>
 										<li>
-											<img src="img/like3.png" />
+											<img src="/reception/img/like3.png" />
 											<div class="intro">
 												<i>Apple苹果iPhone 6s (A1699)</i>
 											</div>
@@ -359,7 +312,7 @@
 											</div>
 										</li>
 										<li>
-											<img src="img/like4.png" />
+											<img src="/reception/img/like4.png" />
 											<div class="intro">
 												<i>Apple苹果iPhone 6s (A1699)</i>
 											</div>
@@ -493,7 +446,7 @@
 					</div>
 					<div class="yui3-u-1-6">
 						<h4>帮助中心</h4>
-						<img src="img/wx_cz.jpg">
+						<img src="/reception/img/wx_cz.jpg">
 					</div>
 				</div>
 			</div>
@@ -518,10 +471,10 @@
 </div>
 <!--页面底部END-->
 
-<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="js/plugins/jquery.easing/jquery.easing.min.js"></script>
-<script type="text/javascript" src="js/plugins/sui/sui.min.js"></script>
-<script type="text/javascript" src="js/widget/nav.js"></script>
+<script type="text/javascript" src="/reception/js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/reception/js/plugins/jquery.easing/jquery.easing.min.js"></script>
+<script type="text/javascript" src="/reception/js/plugins/sui/sui.min.js"></script>
+<script type="text/javascript" src="/reception/js/widget/nav.js"></script>
 </body>
 
 </html>

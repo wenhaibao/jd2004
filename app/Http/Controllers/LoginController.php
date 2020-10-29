@@ -104,4 +104,21 @@ class LoginController extends Controller
         session(['userinfo'=>null]);
         return redirect('index');
     }
+    /**
+     * github登录
+     */
+    public function github(Request $request)
+    {
+        $code = $request->get('code');
+        echo 'code：'.$code;
+        // 获取access_token
+        $this->getAccessToken($code);
+    }
+    /**
+     * 获取access_token
+     */
+    private function getAccessToken()
+    {
+
+    }
 }

@@ -202,7 +202,14 @@
 							<div class="fl">
 								<ul class="btn-choose unstyled">
 									<li>
-										<a href="{{url('')}}" target="_blank" class="sui-btn  btn-danger addshopcar">加入购物车</a>
+										<button id="cart" goods_id="{{$goods['goods_id']}}" target="_blank" class="sui-btn  btn-danger addshopcar">加入购物车</button>
+									</li>
+								</ul>
+							</div>
+							<div class="fl">
+								<ul class="btn-choose unstyled">
+									<li>
+										<button id="fva" class="sui-btn  btn-danger addshopcar">收藏</button>
 									</li>
 								</ul>
 							</div>
@@ -752,3 +759,40 @@ $(function(){
 </body>
 
 </html>
+<script src="/jquery.js"></script>
+<script>
+	$(function(){
+		$(document).on("click","#cart",function(){
+			$.ajax({
+				url:"/cart_add?goods_id="+{{$goods['goods_id']}},
+				type:"get",
+				dataType:"json",
+				success:function(d){
+					console.log(d)
+					if(d.errno==0){
+						alert(d.msg)
+					}else{
+						if(d.errno==400001){
+							window.location.href = '/login'
+						}
+						//错误处理
+						alert(d.msg)
+					}
+				}
+			})
+		})
+		$(document).on("click","#fva",function(){
+			var goods_id = "{{$goods['goods_id']}}"
+			if(goods_id==''){
+				alert('mmp')
+			}
+			$.get('/collect',{goods_id:goods_id},function(d){
+				if(d.code==1){
+					alert(d.msg)
+				}else{
+					alert(d.msg)
+				}
+			},'json')
+		})
+	})
+</script>

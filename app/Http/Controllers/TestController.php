@@ -25,4 +25,14 @@ class TestController extends Controller
         dump($res);
 
     }
+    /**
+     * 天气
+     */
+    public function api1()
+    {
+        $api_url = "https://github.com/login/oauth/access_token";
+        //post
+
+        // 如何请求post请求？
+    }   
 }
