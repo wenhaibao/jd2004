@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 // 测试
 Route::get('/test/upload','TestController@uploadImg');
 Route::post('/test/uploadadd','TestController@uploadadd');
@@ -22,7 +22,7 @@ Route::get('blade', function () {
     });
 
 //前台首页
-Route::get('/index','IndexController@index');
+Route::get('/','IndexController@index');
 // 商品详情
 Route::get('/item','IndexController@item');
 //登录
